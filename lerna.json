@@ -1,0 +1,20 @@
+{
+  "packages": [
+    "projects/*"
+  ],
+  "tagVersionPrefix": "v",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "version": "independent",
+  "command": {
+    "publish": {
+      "registry": "https://registry.npmjs.org"
+    },
+    "version": {
+      "allowBranch": "master",
+      "ignoreChanges": [
+        "**/*.md"
+      ]
+    }
+  }
+}

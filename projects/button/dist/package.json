@@ -1,0 +1,25 @@
+{
+  "name": "@dxul/button",
+  "version": "0.7.1",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@angular/common": "^9.1.13",
+    "@angular/core": "^9.1.13"
+  },
+  "dependencies": {
+    "tslib": "^1.10.0"
+  },
+  "gitHead": "12491a5dd6b7e5a662f682a759e442e923ddde5e",
+  "main": "bundles/dxul-button.umd.js",
+  "module": "fesm5/dxul-button.js",
+  "es2015": "fesm2015/dxul-button.js",
+  "esm5": "esm5/dxul-button.js",
+  "esm2015": "esm2015/dxul-button.js",
+  "fesm5": "fesm5/dxul-button.js",
+  "fesm2015": "fesm2015/dxul-button.js",
+  "typings": "dxul-button.d.ts",
+  "metadata": "dxul-button.metadata.json",
+  "sideEffects": false
+}
