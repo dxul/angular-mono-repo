@@ -57,7 +57,6 @@ jobs:
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
-          scope: "@novakand"
       - run: yarn bootstrap
       - run: yarn build:ci
       - run: yarn publish:ci
