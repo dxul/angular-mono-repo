@@ -31,7 +31,8 @@ jobs:
         run: yarn bootstrap
 
       - name: Create Release
-        run: yarn version:ci
+         run| yarn bootstrap
+          yarn version:ci
 
   publish-npm:
     needs: build
