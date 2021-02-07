@@ -15,7 +15,7 @@ export class ButtonComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log('change 133');
+    console.log('');
   }
 
 }
