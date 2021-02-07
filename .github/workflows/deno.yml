@@ -28,10 +28,12 @@ jobs:
           node-version: 12
 
       - name: Install Dependencies
-        run: yarn bootstrap
+        run: yarn
 
-      - name: Create Release
-        run: yarn version:ci
+      - name: Create Release Pull Request
+        uses: changesets/action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   publish-npm:
     needs: build
@@ -42,9 +44,10 @@ jobs:
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
-      - run: yarn bootstrap
-      - run: yarn build:ci
-      - run: yarn publish:ci
+      - name: Ensure access
+        run: npm whoami --registry https://registry.npmjs.org/
+      - run: yarn
+      - run: yarn publish-ci
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
@@ -57,8 +60,16 @@ jobs:
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
-      - run: yarn bootstrap
-      - run: yarn build:ci
-      - run: yarn publish:ci
+      - name: Ensure access
+        run: npm whoami --registry https://npm.pkg.github.com/
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Config git user
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+      - run: yarn
+      - run: yarn publish-ci
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
