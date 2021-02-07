@@ -28,7 +28,7 @@ jobs:
           node-version: 12
 
       - name: Install Dependencies
-        run: yarn
+        run: yarn bootstrap
 
   publish-npm:
     needs: build
@@ -39,8 +39,9 @@ jobs:
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
-      - run:  yarn build:ci
-      - run:  yarn publish:ci
+      - run: yarn build:ci
+      - run: yarn version:ci
+      - run: yarn publish:ci
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
@@ -53,6 +54,7 @@ jobs:
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
+      - run: yarn version:ci
       - run: yarn build:ci
       - run: yarn publish:ci
         env:
