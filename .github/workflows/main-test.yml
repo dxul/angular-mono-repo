@@ -28,7 +28,7 @@ jobs:
 
     - run: yarn install --frozen-lockfile
     - run: yarn build
-    - run: yarn bootsrap
+    - run: yarn bootstrap
     - run: yarn version:ci
 
     # Publish to npm
