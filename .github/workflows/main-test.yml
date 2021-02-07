@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        ref: dev
+       fetch-depth: 0
 
     # Setup .npmrc file to publish to npm
     - uses: actions/setup-node@v1
