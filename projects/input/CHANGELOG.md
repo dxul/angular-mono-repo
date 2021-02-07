@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.3.1 (2021-02-07)
+
+
+### Bug Fixes
+
+* **dddd:** ddd ([4a1e164](https://github.com/dxul/angular-mono-repo/commit/4a1e1644bb2974d14eb87dadd37a3c6145d205ce))
+* **ndnndndn:** butgthht ([5dc47c4](https://github.com/dxul/angular-mono-repo/commit/5dc47c42c8c52ea7bd5e40ae9d08f202778da0bf))
+
+
+
+
+
 # [0.3.0](https://github.com/novakand/angualr-mono-repo/compare/@dxul/input@0.2.0...@dxul/input@0.3.0) (2021-02-06)
 
 
