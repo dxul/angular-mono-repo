@@ -1,53 +1,35 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-# This workflow will install Deno and run tests across stable and nightly builds on Windows, Ubuntu and macOS.
-# For more information see: https://github.com/denolib/setup-deno
-
-name: Deno
-
+name: publish-to-npm
 on:
   push:
-    branches: [master]
-  pull_request:
-    branches: [master]
-
-
+    branches:
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+       fetch-depth: 0
 
     # Setup .npmrc file to publish to npm
-    - uses: actions/setup-node@v1.4.4
+    - uses: actions/setup-node@v1
       with:
-        node-version: '10.15.1'
+        node-version: '12'
         registry-url: 'https://registry.npmjs.org'
         scope: '@dxul'
 
     - name: Configure git
       run: |
-        git config user.email ""
-        git config user.name "novakand"
+        git config user.email "iam@jamesiv.es"
+        git config user.name "James Ives"
 
+    - name: Install Yarn
+      run: npm install -g yarn
+
+    - run: yarn install --frozen-lockfile
+    - run: yarn build
     - run: yarn bootstrap
     - run: yarn version:ci
-    - run: yarn build:ci
-
-    # Publish to npm
-    - run: yarn publish:ci
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-    # Setup .npmrc file to publish to GitHub Packages
-    - uses: actions/setup-node@v1.4.4
-      with:
-        node-version: 12
-        registry-url: 'https://npm.pkg.github.com'
-        scope: '@dxul'
 
     - name: Authenticate with the GitHub Package Registry
       run:
@@ -57,4 +39,5 @@ jobs:
     # Publish to GitHub Packages
     - run: yarn publish:ci
       env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
