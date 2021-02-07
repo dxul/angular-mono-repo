@@ -34,7 +34,6 @@ jobs:
       - name: Bump versions and publish packages
         run: |
           yarn version:ci
-          yarn build:ci
           yarn publish:ci
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
