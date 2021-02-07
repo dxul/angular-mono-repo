@@ -1,6 +1,6 @@
 {
   "name": "@dxul/input",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "publishConfig": {
     "access": "public",
     "registry": "https://npm.pkg.github.com/dxul"
