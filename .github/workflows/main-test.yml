@@ -30,10 +30,10 @@ jobs:
 
     - name: Configure git
       run: |
-        git config user.email ""
-        git config user.name "novakand"
-
-    - run: yarn bootstrap
+       git config --global user.name "${{ github.actor }}"
+       git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+    - name: Bootstrap lerna
+      run: yarn bootstrap
     - run: yarn version:ci
     - run: yarn build:ci
 
@@ -43,7 +43,7 @@ jobs:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     # Setup .npmrc file to publish to GitHub Packages
-    - uses: actions/setup-node@v1.4.4
+    - uses: actions/setup-node@v1
       with:
         node-version: 12
         registry-url: 'https://npm.pkg.github.com'
