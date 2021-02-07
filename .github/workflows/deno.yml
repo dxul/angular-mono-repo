@@ -44,6 +44,7 @@ jobs:
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
+      - run:  yarn build:ci
       - run:  yarn publish:ci
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
@@ -58,6 +59,7 @@ jobs:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
           scope: "@christopherbiscardi"
-      - run:  yarn publish:ci
+      - run: yarn build:ci
+      - run: yarn publish:ci
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
