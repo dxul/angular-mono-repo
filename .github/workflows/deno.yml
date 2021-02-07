@@ -30,11 +30,6 @@ jobs:
       - name: Install Dependencies
         run: yarn
 
-      - name: Create Release Pull Request
-        uses: changesets/action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
@@ -58,7 +53,6 @@ jobs:
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
-          scope: "@christopherbiscardi"
       - run: yarn build:ci
       - run: yarn publish:ci
         env:
