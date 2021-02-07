@@ -32,8 +32,6 @@ jobs:
       run: |
         git config user.email ""
         git config user.name "novakand"
-    - name: Install Yarn
-      run: yarn bootstrap
 
     - run: yarn bootstrap
     - run: yarn version:ci
