@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: yarn
+      - run: yarn bootstrap
 
   release:
     name: Release
@@ -30,6 +30,9 @@ jobs:
       - name: Install Dependencies
         run: yarn bootstrap
 
+      - name: Create Release
+        run: yarn version:ci
+
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
@@ -39,8 +42,8 @@ jobs:
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
+      - run: yarn bootstrap
       - run: yarn build:ci
-      - run: yarn version:ci
       - run: yarn publish:ci
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
@@ -54,7 +57,7 @@ jobs:
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
-      - run: yarn version:ci
+      - run: yarn bootstrap
       - run: yarn build:ci
       - run: yarn publish:ci
         env:
