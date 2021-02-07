@@ -2,7 +2,8 @@
   "name": "@dxul/button",
   "version": "0.10.0",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/"
   },
   "scripts": {
     "build": "ng build --prod button"
