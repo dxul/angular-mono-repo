@@ -28,22 +28,21 @@ jobs:
       with:
         node-version: '10.15.1'
         registry-url: 'https://registry.npmjs.org'
-        scope: '@jamesives'
+        scope: '@dxul'
 
     - name: Configure git
       run: |
-        git config user.email "iam@jamesiv.es"
-        git config user.name "James Ives"
+        git config user.email ""
+        git config user.name "novakand"
     - name: Install Yarn
-      run: npm install -g yarn
+      run: yarn bootstrap
 
-    - run: yarn install --frozen-lockfile
-    - run: yarn build
-    - run: npm version patch -m "Release %s 📣"
-    - run: git push
+    - run: yarn bootstrap
+    - run: yarn version:ci
+    - run: yarn build:ci
 
     # Publish to npm
-    - run: npm publish --access public
+    - run: yarn publish:ci
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -52,7 +51,7 @@ jobs:
       with:
         node-version: 12
         registry-url: 'https://npm.pkg.github.com'
-        scope: '@jamesives'
+        scope: '@dxul'
 
     - name: Authenticate with the GitHub Package Registry
       run:
@@ -60,6 +59,6 @@ jobs:
         ~/.npmrc
 
     # Publish to GitHub Packages
-    - run: npm publish
+    - run: yarn publish:ci
       env:
         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
