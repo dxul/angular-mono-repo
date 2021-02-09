@@ -1,79 +1,56 @@
-name: Publish Packages
-
+name: publish-to-npm
 on:
   push:
     branches:
       - master
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - run: yarn
+    - uses: actions/checkout@v2
+      with:
+       fetch-depth: 0
 
-  release:
-    name: Release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v1
+    # Setup .npmrc file to publish to npm
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12'
+        registry-url: 'https://registry.npmjs.org'
+        scope: '@dxul'
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12
+    - name: Configure git
+      run: |
+        git config --global user.name "${{ github.actor }}"
+        git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+    - name: Install Yarn
+      run: yarn bootstrap
 
-      - name: Install Yarn
-        run: yarn bootstrap
-
-      - run: yarn version:ci
-      - run: yarn build:ci
-        env:
+    - run: yarn version:ci
+    - run: yarn build:ci
+      env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+    # Publish to npm
+#     - run: yarn publish:ci
+#       env:
+#         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-  publish-npm:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-          registry-url: https://registry.npmjs.org
-          scope: '@dxul'
-      - run: yarn
-      - run: yarn publish:ci
-        env:
-           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    # Setup .npmrc file to publish to GitHub Packages
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 12
+        registry-url: 'https://npm.pkg.github.com'
+        scope: '@dxul'
 
-  publish-gpr:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-          registry-url: https://npm.pkg.github.com
-          scope: '@dxul'
+    - name: Authenticate with the GitHub Package Registry
+      run:
+        echo "//npm.pkg.github.com:_authToken=${{ secrets.GITHUB_TOKEN }}" >
+        ~/.npmrc
 
-      - name: Authenticate with the GitHub Package Registry
-        run:
-          echo "//npm.pkg.github.com:_authToken=${{ secrets.GITHUB_TOKEN }}" >
-         ~/.npmrc
-
-          # Publish to GitHub Packages
-      - run: yarn
-      - run: yarn publish:ci
-    env:
+   # Publish to GitHub Packages
+    - run: yarn publish:ci
+      env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-     
-   
