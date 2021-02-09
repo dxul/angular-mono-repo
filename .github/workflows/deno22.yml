@@ -1,51 +1,24 @@
-name: Publish to NPMJS and GPR
+name: Lerna publish npm
 
 on:
   push:
-    branches:
-      - master
+    branches: ['master']
 
 jobs:
-  publish-to-npm-and-gpr:
-    runs-on: ubuntu-latest
+  publish:
+    runs-on: ubuntu-18.04
     steps:
-      
-      # Checkout the repo
-      - uses: actions/checkout@master
-        
-      # Update package version and set up git
-      - uses: actions/setup-node@master
-      - name: Update package version and setup git
-        run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-          
-          - name: Bootstrap lerna
-          run: yarn
-          run: yarn bootstrap
-          run: yarn version:ci
-          
-      # Publish to NPMJS
-      - uses: actions/setup-node@master
+      - uses: actions/checkout@v2
         with:
-          node-version: 12
-          registry-url: 'https://registry.npmjs.org/'
-      - name: Publish to NPMJS
-        run: |
-          npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
-          npm config set scope "@dxul"
-          run: yarn publish:ci
-        env:
-          CI: true
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-
-      # Publish to GitHub Package Registry
-      - uses: actions/setup-node@master
+          ref: master
+      - uses: actions/setup-node@v1
         with:
-          node-version: 12
-          registry-url: https://npm.pkg.github.com/
-          scope: '@affrae'
-      - name: Publish to GitHub Package Registry
-        run: yarn publish:ci
+          node-version: '12.x'
+      - name: Install dependencies
+        run: |
+          yarn install
+      - uses: smartlyio/lerna-publish-action@v2
+        with:
+          bump: major
         env:
-          NODE_AUTH_TOKEN: ${{github.token}}
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
