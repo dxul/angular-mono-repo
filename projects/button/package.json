@@ -2,8 +2,7 @@
   "name": "@dxul/button",
   "version": "0.16.1",
   "publishConfig": {
-    "access": "public",
-    "registry": "https://npm.pkg.github.com/dxul"
+    "access": "public"
   },
   "repository": {
     "type": "git",

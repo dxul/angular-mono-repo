@@ -2,12 +2,11 @@
   "name": "@dxul/input",
   "version": "0.5.4",
   "publishConfig": {
-    "access": "public",
-    "registry": "https://npm.pkg.github.com/dxul"
+    "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dxul/input"
+    "url": "https://github.com/dxul/angular-mono-repo.git"
   },
   "scripts": {
     "build": "ng build --prod input"
