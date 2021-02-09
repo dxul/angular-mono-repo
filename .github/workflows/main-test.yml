@@ -31,11 +31,11 @@ jobs:
     - run: yarn bootstrap
     - run: yarn version:ci
 
-    # Publish to npm
+   # Publish to npm
 #     - run: yarn publish:ci
-#       env:
-#         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     # Setup .npmrc file to publish to GitHub Packages
     - uses: actions/setup-node@v1
