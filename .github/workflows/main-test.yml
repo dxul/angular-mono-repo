@@ -32,7 +32,7 @@ jobs:
     - run: yarn version:ci
 
    # Publish to npm
-    - run: yarn publish:ci
+#     - run: yarn publish:ci
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
