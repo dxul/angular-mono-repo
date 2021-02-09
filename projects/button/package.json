@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dxul/button"
+    "url": "https://github.com/dxul/angular-mono-repo.git"
   },
   "scripts": {
     "build": "ng build --prod button"
@@ -19,5 +19,5 @@
   "dependencies": {
     "tslib": "^1.10.0"
   },
-  "gitHead": "12491a5dd6b7e5a662f682a759e442e923ddde5e"
+  "gitHead": "9863e53ee376e8244bd5de024ef83a412f0af27e"
 }
