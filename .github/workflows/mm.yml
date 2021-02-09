@@ -24,9 +24,8 @@ jobs:
         git config --global user.email "${{ github.actor }}@users.noreply.github.com"
 
     - name: Install Yarn
-      run: yarn
+      run: yarn bootstrap
 
-    - run: yarn bootstrap
     - run: yarn version:ci
     - run: yarn build:ci
       env:
