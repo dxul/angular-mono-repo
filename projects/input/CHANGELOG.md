@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.5](https://github.com/dxul/angular-mono-repo/compare/@dxul/input@0.5.4...@dxul/input@0.5.5) (2021-02-09)
+
+
+### Bug Fixes
+
+* ddd ([69c4eff](https://github.com/dxul/angular-mono-repo/commit/69c4eff96395593fb04eec25e55b004baf20920a))
+
+
+
+
+
 ## [0.5.4](https://github.com/dxul/input/compare/@dxul/input@0.5.3...@dxul/input@0.5.4) (2021-02-07)
 
 **Note:** Version bump only for package @dxul/input
