@@ -60,9 +60,7 @@ jobs:
         yarn install --immutable
     - name: Build
       
-      run: |
-         yarn
-         yarn prepublish:ci
+      run: yarn prepublish
 
     - name: Create releases
       run: |
