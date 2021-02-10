@@ -83,7 +83,7 @@ jobs:
 
     - name: Publish to Github Repository
       run: |
-        echo "//npm.pkg.github.com/:_authToken=$GITHUB_TOKEN" > .npmrc
+        echo "//npm.pkg.github.com/:_authToken=$USER_GITHUB_TOKEN" > .npmrc
         npx lerna publish -y from-package --registry https://npm.pkg.github.com/dxul
         rm .npmrc
       env:
