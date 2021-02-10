@@ -9,7 +9,7 @@
     "url": "https://github.com/dxul/angular-mono-repo.git"
   },
   "scripts": {
-    "build": "ng build --prod input"
+    "prepare": "ng build --prod input"
   },
   "peerDependencies": {
     "@angular/common": "^9.1.13",
