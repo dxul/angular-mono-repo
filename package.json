@@ -12,7 +12,6 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "commit": "git-cz",
-    "release": "standard-version -a",
     "prepare": "lerna run prepare --concurrency 1",
     "prepublish": "lerna run build --since HEAD~1 --concurrency=1",
     "bootstrap": "npx lerna bootstrap",
