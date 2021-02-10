@@ -16,7 +16,7 @@ jobs:
     
     - name: Checkout
       env:
-        USER_GITHUB_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
+        USER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --global user.name "${{ github.actor }}"
         git config --global user.email "${{ github.actor }}@users.noreply.github.com"
@@ -61,9 +61,9 @@ jobs:
         npx lerna version --yes  --conventional-commits --create-release github --message 'chore(release): publish'
         git stash
       env:
-        GH_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        USER_GITHUB_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
+        USER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Publish to NPM
       run: |
@@ -71,9 +71,9 @@ jobs:
         npx lerna publish -y from-package
         rm .npmrc
       env:
-        GH_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        USER_GITHUB_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
+        USER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Publish to Github Repository
       run: |
@@ -81,6 +81,6 @@ jobs:
         npx lerna publish -y from-package --registry https://npm.pkg.github.com/renavigation2
         rm .npmrc
       env:
-        GH_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        USER_GITHUB_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
+        USER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
