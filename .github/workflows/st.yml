@@ -1,9 +1,9 @@
-
 name: release
+
 on:
   push:
-   branches:
-       - master
+    branches:
+      - master
 
 jobs:
   create-releases:
@@ -20,7 +20,7 @@ jobs:
       run: |
         git checkout master
         git remote rm origin
-        git remote add origin "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
+        git remote add origin "https://$GITHUB_ACTOR:$USER_GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
         git fetch --all
         git pull origin master --ff-only
         git config --global user.name "${{ github.actor }}"
@@ -63,11 +63,12 @@ jobs:
 
     - name: Create releases
       run: |
-        yarn version:ci
+        npx lerna version -y -m "chore(release): publish" --changelog-preset angular --conventional-commits --create-release github
+        git stash
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        USER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Publish to NPM
       run: |
@@ -77,7 +78,7 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        USER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Publish to Github Repository
       run: |
@@ -87,45 +88,4 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-# name: Release
-
-# on:
-#   push:
-#     branches:
-#       - master
-
-# jobs:
-#   publish-gpr:
-#     name: Publish to GPR
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#         with:
-#           fetch-depth: 0
-
-#       - uses: actions/setup-node@v1
-#         with:
-#           node-version: 12
-#           registry-url: 'https://npm.pkg.github.com/'
-
-#       - name: Ensure access
-#         run: npm whoami --registry https://npm.pkg.github.com/
-#         env:
-#           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-#       - name: Config git user
-#         run: |
-#           git config --global user.name "${{ github.actor }}"
-#           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-#       - name: Bootstrap lerna
-#         run: yarn bootstrap
-
-#       - name: Bump versions and publish packages
-#         run: |
-#           yarn version:ci
-#           yarn publish:ci
-#         env:
-#           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        USER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
