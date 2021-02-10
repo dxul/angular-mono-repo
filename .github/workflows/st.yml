@@ -73,8 +73,7 @@ jobs:
     - name: Publish to NPM
       run: |
         echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
-        yarn 
-        yarn publish:ci
+        npx lerna publish -y from-package
         rm .npmrc
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
