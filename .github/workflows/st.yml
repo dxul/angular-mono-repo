@@ -73,9 +73,9 @@ jobs:
     - name: Publish to NPM
       run: |
         echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
-        ~/.npmrc
         yarn 
         yarn publish:ci
+        rm .npmrc
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
