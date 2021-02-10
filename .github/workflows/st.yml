@@ -23,8 +23,8 @@ jobs:
         git remote add origin "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
         git fetch --all
         git pull origin master --ff-only
-        git config --local user.email "me@gabrielbull.com"
-        git config --local user.name "Gabriel Bull"
+        git config --global user.name "${{ github.actor }}"
+        git config --global user.email "${{ github.actor }}@users.noreply.github.com"
     - name: Install node
       uses: actions/setup-node@v1
       with:
