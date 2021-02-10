@@ -6,15 +6,15 @@
   "useWorkspaces": true,
   "version": "independent",
   "command": {
+    "publish": {
+      "registry": "https://npm.pkg.github.com"
+    },
     "version": {
       "allowBranch": "master",
       "ignoreChanges": [
         "**/package.json",
-        "**/__tests__/**",
         "**/*.md",
-        "**/Podfile.lock",
         "**/yarn.lock",
-        "**/.vscode/**",
         "**/.vscode/**"
       ]
     }
