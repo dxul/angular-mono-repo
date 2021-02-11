@@ -1,6 +1,6 @@
 {
   "name": "@dxul/button",
-  "version": "0.33.4",
+  "version": "0.33.5",
   "publishConfig": {
     "access": "public"
   },
