@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.33.3](https://github.com/dxul/angular-mono-repo/compare/@dxul/button@0.33.2...@dxul/button@0.33.3) (2021-02-11)
+
+
+### Bug Fixes
+
+* **button:** button ([0a801c2](https://github.com/dxul/angular-mono-repo/commit/0a801c2feb94e3290e3e5f22c90a551d4cd6af59))
+
+
+
+
+
 ## [0.33.2](https://github.com/dxul/angular-mono-repo/compare/@dxul/button@0.33.1...@dxul/button@0.33.2) (2021-02-11)
 
 
