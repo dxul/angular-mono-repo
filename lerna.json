@@ -11,6 +11,7 @@
     },
     "version": {
       "allowBranch": "master",
+      "message": "chore(release): Publish %s",
       "ignoreChanges": [
         "**/package.json",
         "**/*.md",
