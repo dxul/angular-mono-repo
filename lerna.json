@@ -1,26 +1,3 @@
-// {
-//   "packages": [
-//     "projects/*"
-//   ],
-//   "npmClient": "yarn",
-//   "useWorkspaces": true,
-//   "version": "independent",
-//   "command": {
-//     "publish": {
-//       "registry": "https://npm.pkg.github.com"
-//     },
-//     "version": {
-//       "conventionalCommits": true,
-//       "message": "chore(release): publish %s",
-//       "ignoreChanges": [
-//         "**/package.json",
-//         "**/*.md",
-//         "**/yarn.lock",
-//         "**/.vscode/**"
-//       ]
-//     }
-//   }
-// }
 
 {
   "packages": [
