@@ -7,11 +7,20 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
-      with:
-        node-version: 12
-    - uses: actions/checkout@master
-    - uses: go-semantic-release/action@v1
-      with:
-        github_token:  ${{ secrets.GITHUB_TOKEN }}
+  - name: Checkout
+    uses: actions/checkout@v2
+  - run: git fetch --unshallow --tags
+  - name: auto release
+    uses: terradatum/auto-action@master
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    with:
+      email: kbaz@gmail.com
+      name: Kathy Baz
+      command: release
+      plugins: |
+        npm
+        git-tag
+        releases
+   
