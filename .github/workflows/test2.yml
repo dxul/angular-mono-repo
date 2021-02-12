@@ -12,7 +12,6 @@ jobs:
       with:
         node-version: 12
     - run: yarn
-    - run: yarn build
     - uses: actions/checkout@master
     - uses: go-semantic-release/action@v1
       with:
