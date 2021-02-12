@@ -1,23 +1,49 @@
+// {
+//   "packages": [
+//     "projects/*"
+//   ],
+//   "npmClient": "yarn",
+//   "useWorkspaces": true,
+//   "version": "independent",
+//   "command": {
+//     "publish": {
+//       "registry": "https://npm.pkg.github.com"
+//     },
+//     "version": {
+//       "conventionalCommits": true,
+//       "message": "chore(release): publish %s",
+//       "ignoreChanges": [
+//         "**/package.json",
+//         "**/*.md",
+//         "**/yarn.lock",
+//         "**/.vscode/**"
+//       ]
+//     }
+//   }
+// }
+
 {
   "packages": [
-    "projects/*"
+    "packages/*"
   ],
-  "npmClient": "yarn",
-  "useWorkspaces": true,
-  "version": "independent",
+  "version": "0.20.0",
   "command": {
     "publish": {
-      "registry": "https://npm.pkg.github.com"
+      "message": "chore(release): publish %s"
     },
     "version": {
       "conventionalCommits": true,
-      "message": "chore(release): publish %s",
-      "ignoreChanges": [
-        "**/package.json",
-        "**/*.md",
-        "**/yarn.lock",
-        "**/.vscode/**"
-      ]
+      "changelogPreset": "conventional-changelog-angular",
+      "message": "chore(release): publish %s"
     }
-  }
+  },
+  "ignoreChanges": [
+    "ignored-file",
+    "**/*.md",
+    "**/tslint.json",
+    "**/tsconfig.json",
+    "*.md",
+    "tslint.json",
+    "tsconfig.json"
+  ]
 }
