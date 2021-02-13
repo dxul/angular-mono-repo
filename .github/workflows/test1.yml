@@ -26,7 +26,7 @@ jobs:
       run: yarn bootstrap
     - name: Create releases
       run: |
-        npx lerna version -y -m "chore(release): publish" --changelog-preset angular --conventional-commits --create-release github
+        npx lerna version -y -m "chore(release): publish" --conventional-commits --create-release github
         git stash
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
