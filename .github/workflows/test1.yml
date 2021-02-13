@@ -46,6 +46,11 @@ jobs:
 
  
 
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12'
+        registry-url: 'https://npm.pkg.github.com'
+        scope: '@dxul'
 #     Publish to GitHub Packages
     - run: npx lerna publish -y from-package --registry https://npm.pkg.github.com/dxul
       env:
