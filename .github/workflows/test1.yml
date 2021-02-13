@@ -29,8 +29,8 @@ jobs:
         run: |
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-      - name: Bootstrap lerna
-        run: yarn bootstrap
+#       - name: Bootstrap lerna
+#         run: yarn bootstrap
 
       - name: Bump versions and publish packages
         run: |
@@ -49,9 +49,9 @@ jobs:
         uses: actions/setup-node@v2.1.4
         with:
           node-version: '12'
-      - name: Install Packages
-        run: |
-           yarn bootstrap
+#       - name: Install Packages
+#         run: |
+#            yarn bootstrap
 #       - name: Build Package
 #         run: npm run build
       - name: Prepare Package
@@ -69,9 +69,9 @@ jobs:
         uses: actions/setup-node@v2.1.4
         with:
           node-version: '12'
-      - name: Install Packages
-        run: |
-          yarn bootstrap
+#       - name: Install Packages
+#         run: |
+#           yarn bootstrap
 #       - name: Build Package
 #         run: npm run build
       - name: Prepare Package
