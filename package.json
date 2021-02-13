@@ -15,7 +15,7 @@
     "prepublish": "lerna run build --since HEAD~1 --concurrency=1",
     "bootstrap": "npx lerna bootstrap",
     "publish:ci": "lerna publish from-package --yes --contents dist",
-    "version:ci": "lerna version -y  --conventional-commits --create-release github --message 'chore(release): publish %s'",
+    "version:ci": "lerna version -y  --conventional-commits --create-release github --message 'chore(release): publish'",
     "build:ci": "lerna run build "
   },
   "private": true,
