@@ -17,8 +17,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-          registry-url: 'https://npm.pkg.github.com/'
-          scope: '@dxul'
+#           registry-url: 'https://npm.pkg.github.com/'
+#           scope: '@dxul'
 
       - name: Ensure access
         run: npm whoami --registry https://npm.pkg.github.com/
@@ -42,7 +42,7 @@ jobs:
       - name: Publish to NPM
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
-          npx lerna publish -y from-package
+          yarn publish:ci
           rm .npmrc
         env:
          GH_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
