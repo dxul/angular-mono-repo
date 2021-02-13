@@ -12,7 +12,6 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "commit": "git-cz",
-    "prepare": "git update-index skip-worktree -- .npmrc lerna run prepare --concurrency 1",
     "prepublish": "lerna run build --since HEAD~1 --concurrency=1",
     "bootstrap": "npx lerna bootstrap",
     "publish:ci": "lerna publish from-package --yes --contents dist",
