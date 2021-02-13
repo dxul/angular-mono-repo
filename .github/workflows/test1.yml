@@ -43,8 +43,8 @@ jobs:
         run: |
           npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
       - name: Upload Package
-#         run: yarn publish:ci
-        run: lerna publish from-package --yes
+        run: yarn publish:ci
+#         run: lerna publish from-package --yes
       - name: Prepare Package
         run: |
           npm config set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }}
