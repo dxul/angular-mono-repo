@@ -18,8 +18,7 @@ jobs:
         with:
           node-version: '12'
       - name: Install Packages
-        run: |
-          run: yarn bootstrap
+        run: yarn bootstrap
       - name: Build Package
         run:  yarn version:ci
       - name: Prepare Package
