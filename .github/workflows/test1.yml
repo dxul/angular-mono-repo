@@ -44,6 +44,10 @@ jobs:
           npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
       - name: Upload Package
         run: yarn publish:ci
+        env:
+         GH_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
+         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+         USER_GITHUB_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
 #         run: lerna publish from-package --yes
       - name: Prepare Package
         run: |
