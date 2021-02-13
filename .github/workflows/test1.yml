@@ -19,8 +19,8 @@ jobs:
       - name: Install Packages
         run: |
          yarn bootstrap
-      - name: Build Package
-        run: npm run build
+#       - name: Build Package
+#         run: npm run build
       - name: Create releases
         run: |
          npx lerna version -y -m "chore(release): publish" --changelog-preset angular --conventional-commits --create-release github
@@ -46,8 +46,8 @@ jobs:
       - name: Install Packages
         run: |
          yarn bootstrap
-      - name: Build Package
-        run: npm run build
+#       - name: Build Package
+#         run: npm run build
       - name: Prepare Package
         run: |
           npm config set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }}
