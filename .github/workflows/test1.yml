@@ -18,7 +18,6 @@ jobs:
         with:
           node-version: 12
           registry-url: 'https://npm.pkg.github.com/'
-          scope: '@dxul'
 
       - name: Ensure access
         run: npm whoami --registry https://npm.pkg.github.com/
@@ -37,19 +36,33 @@ jobs:
           yarn version:ci
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Prepare Package
         run: |
-          npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
+           npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
       - name: Upload Package
-        run: npx lerna publish from-git --yes
+        run: yarn publish:ci
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
       - name: Prepare Package
         run: |
-          npm config set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }}
+           npm config set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }}
       - name: Upload Package
-        run: npx lerna publish from-git --registry https://npm.pkg.github.com/dxul --yes
-          
+        run: yarn publish:ci
+
+
+# name: Release
+
+# on:
+#   push:
+#     branches:
+#       - master
+
+# jobs:
 #   release_npm:
 #     runs-on: ubuntu-latest
 #     name: Publish Package to NPM
@@ -57,19 +70,26 @@ jobs:
 #       - name: Checkout
 #         uses: actions/checkout@v2
 #       - name: Setup Node
-#         uses: actions/setup-node@v2.1.4
+#         uses: actions/setup-node@v1
 #         with:
 #           node-version: '12'
-# #       - name: Install Packages
-# #         run: |
-# #            yarn bootstrap
+#       - name: Install Packages
+#         run: |
+#          yarn bootstrap
 # #       - name: Build Package
 # #         run: npm run build
+#       - name: Create releases
+#         run: |
+#          npx lerna version -y -m "chore(release): publish" --changelog-preset angular --conventional-commits --create-release github
+#          env:
+#           GH_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
+#           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+#           USER_GITHUB_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
 #       - name: Prepare Package
 #         run: |
 #           npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
 #       - name: Upload Package
-#         run: npx lerna publish from-git --yes
+#         run: npx lerna publish from-package --yes
 #   release_github:
 #     runs-on: ubuntu-latest
 #     name: Publish Package to GITHUB
@@ -77,16 +97,74 @@ jobs:
 #       - name: Checkout
 #         uses: actions/checkout@v2
 #       - name: Setup Node
-#         uses: actions/setup-node@v2.1.4
+#         uses: actions/setup-node@v1
 #         with:
 #           node-version: '12'
-# #       - name: Install Packages
-# #         run: |
-# #           yarn bootstrap
+#       - name: Install Packages
+#         run: |
+#          yarn bootstrap
 # #       - name: Build Package
 # #         run: npm run build
 #       - name: Prepare Package
 #         run: |
 #           npm config set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }}
 #       - name: Upload Package
-#         run: npx lerna publish from-git --registry https://npm.pkg.github.com/dxul --yes
+#         run: npx lerna publish from-package --registry https://npm.pkg.github.com/dxul --yes
+          
+# #       - name: Prepare Package
+# #         run: |
+# #           npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
+# #       - name: Upload Package
+# #         run: yarn publish:ci
+# #         env:
+# #          GH_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
+# #          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+# #          USER_GITHUB_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
+# #         run: lerna publish from-package --yes
+# #       - name: Prepare Package
+# #         run: |
+# #           npm config set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }}
+# #       - name: Upload Package
+# # #         run: yarn publish:ci
+# #         run: npx lerna publish from-package --registry https://npm.pkg.github.com/dxul --yes
+          
+# #   release_npm:
+# #     runs-on: ubuntu-latest
+# #     name: Publish Package to NPM
+# #     steps:
+# #       - name: Checkout
+# #         uses: actions/checkout@v2
+# #       - name: Setup Node
+# #         uses: actions/setup-node@v2.1.4
+# #         with:
+# #           node-version: '12'
+# # #       - name: Install Packages
+# # #         run: |
+# # #            yarn bootstrap
+# # #       - name: Build Package
+# # #         run: npm run build
+# #       - name: Prepare Package
+# #         run: |
+# #           npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
+# #       - name: Upload Package
+# #         run: npx lerna publish from-git --yes
+# #   release_github:
+# #     runs-on: ubuntu-latest
+# #     name: Publish Package to GITHUB
+# #     steps:
+# #       - name: Checkout
+# #         uses: actions/checkout@v2
+# #       - name: Setup Node
+# #         uses: actions/setup-node@v2.1.4
+# #         with:
+# #           node-version: '12'
+# # #       - name: Install Packages
+# # #         run: |
+# # #           yarn bootstrap
+# # #       - name: Build Package
+# # #         run: npm run build
+# #       - name: Prepare Package
+# #         run: |
+# #           npm config set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }}
+# #       - name: Upload Package
+# #         run: npx lerna publish from-git --registry https://npm.pkg.github.com/dxul --yes
