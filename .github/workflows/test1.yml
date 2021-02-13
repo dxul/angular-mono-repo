@@ -18,22 +18,21 @@ jobs:
         registry-url: 'https://registry.npmjs.org'
         scope: '@dxul'
 
-    - name: Configure git
-      run: |
-        git config --global user.name "${{ github.actor }}"
-        git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+#     - name: Configure git
+#       run: |
+#         git config --global user.name "${{ github.actor }}"
+#         git config --global user.email "${{ github.actor }}@users.noreply.github.com"
     - name: Install Yarn
       run: yarn bootstrap
     - name: Create releases
       run: |
         npx lerna version -y -m "chore(release): publish" --conventional-commits --create-release github
-        git stash
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         USER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - run:  npx lerna publish -y from-package --registry https://registry.npmjs.org/dxul
+    - run:  npx lerna publish -y from-package
       env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
