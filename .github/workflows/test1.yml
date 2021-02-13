@@ -18,8 +18,7 @@ jobs:
           node-version: '12'
       - name: Install Packages
         run: |
-          yarn
-          npx lerna bootstrap --ci
+         yarn bootstrap
       - name: Build Package
         run: npm run build
       - name: Create releases
@@ -46,8 +45,7 @@ jobs:
           node-version: '12'
       - name: Install Packages
         run: |
-          yarn
-          npx lerna bootstrap --ci
+         yarn bootstrap
       - name: Build Package
         run: npm run build
       - name: Prepare Package
