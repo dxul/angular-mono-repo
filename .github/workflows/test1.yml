@@ -39,15 +39,26 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
-      - name: Prepare Package
+      - name: Publish to NPM
         run: |
-          npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
-      - name: Upload Package
-        run: yarn publish:ci
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+          npx lerna publish -y from-package
+          rm .npmrc
         env:
          GH_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
          USER_GITHUB_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
+
+          
+#       - name: Prepare Package
+#         run: |
+#           npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
+#       - name: Upload Package
+#         run: yarn publish:ci
+#         env:
+#          GH_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
+#          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+#          USER_GITHUB_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
 #         run: lerna publish from-package --yes
       - name: Prepare Package
         run: |
